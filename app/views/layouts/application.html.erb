@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Golden Recipes Testing!</title>
+    <title>Golden Recipes!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+          <% if !user_signed_in? %>
+            <%= link_to "Sign Up", new_user_registration_path %><br>
+            <%= link_to "Login", new_user_session_path %>
+          <% else %>
+            <%= current_user.email %><br>
+            <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+          <% end %>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
   <body>
     <%= yield %>
