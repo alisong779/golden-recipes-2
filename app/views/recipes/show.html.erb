@@ -1,5 +1,9 @@
 <h1>Form Recipe</h1>
-#for image:
-#if @user.avatar.attached?
-#image src = (url_for(@user.avatar))
-#end 
+#Notes:
+#show image - image tag
+#show recipe title, decription, create by recipe.user.email
+#iterate thru ingredients and directions (separately)
+#link to Back root path
+#if user signed_in :
+#link to Edit edit recipe path
+#link to Delete recipe path method delete
