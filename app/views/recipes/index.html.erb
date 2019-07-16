@@ -1,15 +1,18 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div>
-  <h1 align="center">Welcome to Golden Recipes!</h1>
-  <%= link_to "Logout", destroy_user_session_path, method: "delete"%>
-</div>
 
-#Notes:
-#iterate through recipes
-#link to recipe title - recipe path
-#link to avatar
+
+<% @recipe.each_slice(3) do |recipes| %>
+  <div class="row">
+    <% recipes.each do |recipe| %>
+      <div class="col-md-4">
+            <%= link_to recipe do %>
+              <%= image_tag recipe.image.url(:medium) %>
+            <% end %>
+          </div>
+          <h2>
+            <%= link_to recipe.title, recipe %>
+          </h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    <% end %>

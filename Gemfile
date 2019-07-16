@@ -39,7 +39,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'dotenv-rails'
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
 
 
 group :development, :test do
