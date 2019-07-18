@@ -41,8 +41,7 @@ gem 'omniauth-github'
 gem 'dotenv-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
-gem 'simple_form', '~> 4.1'
-gem 'cocoon', '~> 1.2', '>= 1.2.14'
+
 
 
 group :development, :test do
