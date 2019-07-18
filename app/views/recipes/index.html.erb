@@ -1,6 +1,14 @@
-
+<div class="container">
+<h1>Recipes</h1>
+<div class="row">
 <% @recipe.each do |recipe| %>
-  <ul>
-    <li><%= recipe.title %><br></li>
-  </ul>
+<div class="col-md-4">
+  <div class="recipe-box">
+    <ul>
+      <h4><%= recipe.title %></h4>
+      <%= recipe.description %><br>
+      <%= link_to 'View Recipe', recipe %>
+    </ul>
+  </div><!-- /recipe-box-->
+</div><!--col-md-4-->
 <% end %>
