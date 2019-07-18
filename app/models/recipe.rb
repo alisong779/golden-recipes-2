@@ -11,10 +11,15 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients,
                                 reject_if: :all_blank,
                                 allow_destroy: true
-accepts_nested_attributes_for :recipe_ingredients,
-                               reject_if: :all_blank,
-                               allow_destroy: true
-  validates :title, :description, :avatar, presence: true
-  has_one_attached :avatar
+# accepts_nested_attributes_for :recipe_ingredients,
+#                                reject_if: :all_blank,
+#                                allow_destroy: true
+  validates :title, :description, presence: true
 
+  def ingredient_attributes=(ingredient_attributes)
+    ingredient_attributes.values.each do |ingredient_attribute|
+      ingredient= Ingredient.find_or_create_by(ingredient_attribute)
+      self.ingredients << ingredient
+    end
+  end
 end
