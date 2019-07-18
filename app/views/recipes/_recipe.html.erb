@@ -1,19 +1,15 @@
-<h3 id="name"><%= @recipe.title %></h3>
+<h2 id="name"><%= @recipe.title %></h2>
 
 
 <strong>Directions:</strong>
-  <ul>
-    <% @recipe.directions.each do |direction| %>
-      <li>
-        <%= direction.step %>
-      </li>
-        <% end %>
-    </ul>
-
-
+    <% @recipe.directions.each do |direction| %><br>
+      <%= direction.step %>
+    <% end %>
+<br>
+<br>
 <strong>Ingredients:</strong>
 <ul>
   <% @recipe.recipe_ingredients.each do |ri| %>
-    <li><%= ri.name %> - <%= ri.quantity %> - <%= ri.ingredient.unit %></li>
+    <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.ingredient.name %></li>
   <% end %>
 </ul>

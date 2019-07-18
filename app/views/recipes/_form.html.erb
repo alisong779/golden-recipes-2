@@ -32,7 +32,7 @@
         <%= ri.label :unit %>
         <%= ri.text_field :unit %>
 
-        <%= f.fields_for :ingredients, @recipe_ingredient.build_ingredient do |i| %>
+        <%= ri.fields_for :ingredient, @recipe_ingredient.build_ingredient do |i| %>
           <%= i.label :name %>
           <%= i.text_field :name %><br>
         <% end %>
