@@ -20,12 +20,14 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to @recipe, notice: "Succesfully created new recipe"
+      binding.pry
     else
       render 'new'
     end
   end
 
   def edit
+    @recipe_ingredient = RecipeIngredient.find(params[:id])
   end
 
   def update
