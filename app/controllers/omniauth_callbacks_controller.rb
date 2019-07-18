@@ -5,14 +5,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
     sign_in_and_redirect @user, :event => :authentication
     set_flash_message(:notice, :success, :kind => provider_name) if is_navigational_format?
-  end 
+  end
 
   def github
     sign_in_with "Github"
   end
 
-  # def github
-  #   @user = User.from_omniauth(request.env["omniauth.auth"])
-  #   signin_and_redirect @user
-  # end
 end

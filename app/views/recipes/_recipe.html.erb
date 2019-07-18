@@ -1,6 +1,7 @@
-<h2 id="name"><%= @recipe.title %></h2>
-
-
+<h2><%= @recipe.title %></h2>
+<h4>Description:</h4><%= @recipe.description %>
+<br>
+<br>
 <strong>Directions:</strong>
     <% @recipe.directions.each do |direction| %><br>
       <%= direction.step %>
