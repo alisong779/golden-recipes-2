@@ -1,4 +1,4 @@
-<%= simple_form_for @recipe do |f| %>
+<%= form_for @recipe do |f| %>
   <% if @recipe.errors.any? %>
       <p>
         <%= @recipe.errors.count %>
@@ -11,5 +11,43 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+  <div class="field">
+    <h3>Ingredients</h3>
+      <%= f.fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
+        <%= ri.label :quantity %>
+        <%= ri.number_field :quantity %>
+        <%= ri.label :unit %>
+        <%= ri.text_field :unit %>
+
+        <%= f.fields_for :ingredients, @recipe_ingredient.build_ingredient do |i| %>
+          <%= i.label :name %>
+          <%= i.text_field :name %><br>
+        <% end %>
+      <% end %>
+  </div>
+
+  <div class="field">
+      <h3>Directions</h3>
+        <%= f.fields_for :directions, @direction do |direction| %>
+          <%= direction.label :step %>
+          <%= direction.text_field :step%>
+        <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
