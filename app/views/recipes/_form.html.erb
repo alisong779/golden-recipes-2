@@ -26,31 +26,35 @@
 
 
   <h4>Ingredients:</h4>
-    <div class="form-row">
-      <%= f.fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
-    <div class="form-group col-md-4">
+    <div class="form-group">
+      <%= f.nested_fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
+    <div class="form-group col-md-2">
         <%= ri.label :quantity %>
         <%= ri.number_field :quantity, class: 'form-control' %>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <%= ri.label :unit %>
         <%= ri.text_field :unit, class: 'form-control' %>
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
         <%= ri.fields_for :ingredient, @recipe_ingredient.build_ingredient do |i| %>
           <%= i.label :name %>
           <%= i.text_field :name, class: 'form-control' %><br>
     </div>
         <% end %>
       <% end %>
-
-  <div class="form-group col-md-4">
-      <h4>Directions:</h4>
-        <%= f.fields_for :directions, @direction do |direction| %>
-          <%= direction.label :step %>
-          <%= direction.text_field :step, class: 'form-control'%>
-        <% end %>
-    </div>
+      <%= f.add_nested_fields_link :recipe_ingredients, 'Add Recipe Ingredients' %>
+<br>
+<br>
+<div class="form-group" >
+    <h4>Directions:</h4>
+      <%= f.nested_fields_for :directions, @direction do |direction| %>
+        <%= direction.label :step %>
+        <%= direction.text_field :step, class: 'form-control'%>
+      <% end %>
+      <%= f.add_nested_fields_link :directions, 'Add Step' %>
+  </div>
+<br>
   </div>
       <%= f.submit "Create Recipe", class: 'btn btn-primary' %>
   <% end %>

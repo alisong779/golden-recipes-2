@@ -42,6 +42,7 @@ gem 'dotenv-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'pry'
+gem 'nested_form_fields'
 
 
 
