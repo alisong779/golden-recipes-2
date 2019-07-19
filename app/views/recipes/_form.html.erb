@@ -13,41 +13,44 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<br>
+  <div class="form-group">
       <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="field">
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-    </div>
-
-  <div class="field">
-    <h3>Ingredients</h3>
-      <%= f.fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
-        <%= ri.label :quantity %>
-        <%= ri.number_field :quantity %>
-        <%= ri.label :unit %>
-        <%= ri.text_field :unit %>
-
-        <%= ri.fields_for :ingredient, @recipe_ingredient.build_ingredient do |i| %>
-          <%= i.label :name %>
-          <%= i.text_field :name %><br>
-        <% end %>
-      <% end %>
+      <%= f.text_field :title, class: 'form-control' %>
   </div>
 
-  <div class="field">
-      <h3>Directions</h3>
-        <%= f.fields_for :directions, @direction do |direction| %>
-          <%= direction.label :step %>
-          <%= direction.text_field :step%>
-        <% end %>
+  <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
     </div>
 
-    <div class="actions">
-      <%= f.submit %>
+
+  <h4>Ingredients:</h4>
+    <div class="form-row">
+      <%= f.fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
+    <div class="form-group col-md-4">
+        <%= ri.label :quantity %>
+        <%= ri.number_field :quantity, class: 'form-control' %>
     </div>
+    <div class="form-group col-md-4">
+        <%= ri.label :unit %>
+        <%= ri.text_field :unit, class: 'form-control' %>
+  </div>
+  <div class="form-group col-md-4">
+        <%= ri.fields_for :ingredient, @recipe_ingredient.build_ingredient do |i| %>
+          <%= i.label :name %>
+          <%= i.text_field :name, class: 'form-control' %><br>
+    </div>
+        <% end %>
+      <% end %>
+
+  <div class="form-group col-md-4">
+      <h4>Directions:</h4>
+        <%= f.fields_for :directions, @direction do |direction| %>
+          <%= direction.label :step %>
+          <%= direction.text_field :step, class: 'form-control'%>
+        <% end %>
+    </div>
+  </div>
+      <%= f.submit "Create Recipe", class: 'btn btn-primary' %>
   <% end %>
