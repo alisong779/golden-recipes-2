@@ -1,18 +1,15 @@
 <%= form_for @recipe do |f| %>
   <% if @recipe.errors.any? %>
-      <p>
-        <%= @recipe.errors.count %>
-        Prevented this recipe froms saving
-      </p>
+    <div id="error_explanation">
+      <h4><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h4>
       <ul>
         <% @recipe.errors.full_messages.each do |msg| %>
-          <li>
-            <%= msg %>
-          </li>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
 <br>
   <div class="form-group">
       <%= f.label :title %>
@@ -24,10 +21,9 @@
       <%= f.text_area :description, class: 'form-control' %>
     </div>
 
-
   <h4>Ingredients:</h4>
     <div class="form-group">
-      <%= f.nested_fields_for :recipe_ingredients, @recipe_ingredient do |ri| %>
+      <%= f.fields_for :recipe_ingredients do |ri| %>
     <div class="form-group col-md-2">
         <%= ri.label :quantity %>
         <%= ri.number_field :quantity, class: 'form-control' %>
@@ -37,13 +33,13 @@
         <%= ri.text_field :unit, class: 'form-control' %>
   </div>
   <div class="form-group col-md-3">
-        <%= ri.fields_for :ingredient, @recipe_ingredient.build_ingredient do |i| %>
+        <%= ri.fields_for :ingredient, @ingredient do |i| %>
           <%= i.label :name %>
-          <%= i.text_field :name, class: 'form-control' %><br>
+          <%= i.text_field :name, class: 'form-control' %>
     </div>
         <% end %>
       <% end %>
-      <%= f.add_nested_fields_link :recipe_ingredients, 'Add Recipe Ingredients' %>
+
 <br>
 <br>
 <div class="form-group" >
@@ -55,6 +51,9 @@
       <%= f.add_nested_fields_link :directions, 'Add Step' %>
   </div>
 <br>
+
   </div>
-      <%= f.submit "Create Recipe", class: 'btn btn-primary' %>
+  <div class="actions">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+  </div>
   <% end %>

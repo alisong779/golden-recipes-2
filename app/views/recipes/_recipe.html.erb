@@ -1,5 +1,8 @@
 <br>
 <h2><%= @recipe.title %></h2>
+<strong>Created by:</strong>
+<%= link_to @recipe.user.email, user_recipes_path(@recipe.user), id: "email" %><br>
+
 <h4>Description:</h4><%= @recipe.description %>
 <br>
 <br>
@@ -12,6 +15,6 @@
 <strong>Ingredients:</strong>
 <ul>
   <% @recipe.recipe_ingredients.each do |ri| %>
-    <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.ingredient.name %></li>
+    <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.ingredient.name %> </li>
   <% end %>
 </ul>

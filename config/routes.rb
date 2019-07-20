@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
   root "home_page#index"
-  resources :recipes do
-    resources :recipe_ingredients
-  end 
-  resources :ingredients
-  resources :directions
-
 
   devise_for :users, :controllers => {:omniauth_callbacks => "omniauth_callbacks" }
 
@@ -17,4 +11,14 @@ Rails.application.routes.draw do
       get 'signup', to: 'devise/registrations#new'
     end
 
+
+    resources :recipes, :ingredients, :directions, :recipe_ingredients
+
+    resources :users, only: [:show] do
+      resources :recipes, only: [:index]
+    end
+
+    resources :recipes, only: [:show] do
+      resources :ingredients, only: [:index, :new, :create]
+    end 
 end

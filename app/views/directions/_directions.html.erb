@@ -1,3 +1,4 @@
+<%= form_for(@recipe) do |f| %>
 <div class="form-group" >
     <h4>Directions:</h4>
       <%= f.fields_for :directions, @direction do |direction| %>
@@ -5,3 +6,4 @@
         <%= direction.text_field :step, class: 'form-control'%>
       <% end %>
   </div>
+    <% end %>

@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  has_many :recipe_ingredients, inverse_of: :recipe
+  has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
   has_many :directions
   belongs_to :user
