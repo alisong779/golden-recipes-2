@@ -12,3 +12,6 @@
   </div>
 </div>
 <% end %>
+<% if !current_user %>
+  <%= link_to "Sign In to create a Recipe", new_user_session_path %>
+<% end %>

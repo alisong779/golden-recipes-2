@@ -12,6 +12,9 @@
     <%= render partial: "layouts/partials/jumbotron" %>
     <%= render partial: "layouts/partials/navbar" %>
     <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
     <%= yield %>
     </div>
   </body>

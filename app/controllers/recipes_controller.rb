@@ -17,16 +17,16 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    2.times { @recipe.recipe_ingredients.build.build_ingredient }
+    @recipe.recipe_ingredients.build.build_ingredient
     @direction = @recipe.directions.build
   end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
-      redirect_to recipe_path(@recipe), notice: "Succesfully created new recipe"
+      redirect_to recipe_path(@recipe)
+      flash[:success] = "Recipe Sucessfully Created!"
     else
-      2.times { @recipe.recipe_ingredients.build.build_ingredient }
       render 'new'
     end
   end
@@ -40,7 +40,8 @@ class RecipesController < ApplicationController
     # @recipe_ingredient = RecipeIngredient.find(params[:id])
     # @ingredient = @recipe_ingredient.ingredient
     if @recipe.update(recipe_params)
-      redirect_to @recipe, notice: "Succesfully updated recipe"
+      redirect_to @recipe
+      flash[:success] = "Sucessfully Update Recipe!"
     else
       render 'edit'
     end
