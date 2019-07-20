@@ -32,6 +32,10 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    if !authorized_to_edit?(@recipe)
+      redirect_to recipes_path
+      flash[:alert]= "You cant edit that recipe!"
+    end
     # @recipe_ingredient = RecipeIngredient.find(params[:id])
     # @ingredient = @recipe_ingredient.ingredient
   end
@@ -39,6 +43,10 @@ class RecipesController < ApplicationController
   def update
     # @recipe_ingredient = RecipeIngredient.find(params[:id])
     # @ingredient = @recipe_ingredient.ingredient
+    if !authorized_to_edit?(@recipe)
+      redirect to recipes_path
+      flash[:alert]= "You cant edit that recipe!"
+    end
     if @recipe.update(recipe_params)
       redirect_to @recipe
       flash[:success] = "Sucessfully Update Recipe!"
@@ -49,7 +57,8 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe.destroy
-    redirect_to root_path, notice: "Succesfully deleted recipe"
+    redirect_to root_path
+    flash[:success] = "Succesfully deleted recipe!"
   end
 
   private
