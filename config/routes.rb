@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     end
 
     resources :recipes, only: [:show] do
+      collection do
+        get :most_recent
+        get :title_length
+      end
       resources :ingredients, only: [:index, :new, :create]
-    end 
+    end
 end

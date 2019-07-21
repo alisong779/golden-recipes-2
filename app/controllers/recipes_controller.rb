@@ -2,6 +2,16 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+  def most_recent
+    @recipes = Recipe.most_recent
+    render action :index
+  end
+
+  def recipe_length
+    @recipes = Recipe.title_length
+    render action :index
+  end
+
   def index
     if params[:user_id]
       @user = current_user
@@ -12,7 +22,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    render 'show'
+
   end
 
   def new
