@@ -7,11 +7,13 @@
     <ul>
       <h4><%= recipe.title %></h4>
       <%= recipe.description %><br>
-      <%= link_to 'View Recipe', recipe %>
+      <% if user_signed_in? %>
+        <%= link_to 'View Recipe', recipe %>
+      <% end %>
     </ul>
   </div>
 </div>
   <% end %>
   <% if !current_user %>
-    <%= link_to "Sign In to create a Recipe", new_user_session_path %>
+    <%= link_to "Sign In to Create and View Recipes", new_user_session_path %>
   <% end %>

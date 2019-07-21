@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe = Recipe.new(user_id: params[:user_id])
     3.times {@recipe.recipe_ingredients.build.build_ingredient}
     @direction = @recipe.directions.build
   end
@@ -37,6 +37,7 @@ class RecipesController < ApplicationController
       redirect_to recipes_path
       flash[:alert]= "You cant edit that recipe!"
     end
+
     # @recipe_ingredient = RecipeIngredient.find(params[:id])
     # @ingredient = @recipe_ingredient.ingredient
   end

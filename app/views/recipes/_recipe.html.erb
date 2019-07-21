@@ -1,6 +1,5 @@
 <br>
 <h2><%= @recipe.title %></h2>
-<strong>Created by:</strong>
 <%= link_to @recipe.user.email, user_recipes_path(@recipe.user), id: "email" %><br>
 <br>
 <h4>Description:</h4><%= @recipe.description %>
