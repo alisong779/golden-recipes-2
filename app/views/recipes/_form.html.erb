@@ -22,7 +22,7 @@
 
   <h4>Ingredients:</h4>
     <div class="form-group">
-      <%= f.fields_for :recipe_ingredients do |ri| %>
+      <%= f.nested_fields_for :recipe_ingredients do |ri| %>
     <div class="form-group col-md-2">
         <%= ri.label :quantity %>
         <%= ri.number_field :quantity, class: 'form-control' %>
