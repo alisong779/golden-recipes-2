@@ -7,17 +7,16 @@ class RecipesController < ApplicationController
       @user = current_user
       @recipes = @user.recipes
     else
-      @recipes = Recipe.most_recent(3).title_length
+      @recipes = Recipe.most_recent(3).title_length(5)
     end
   end
 
   def show
-
   end
 
   def new
     @recipe = Recipe.new
-    @recipe.recipe_ingredients.build.build_ingredient
+    3.times {@recipe.recipe_ingredients.build.build_ingredient}
     @direction = @recipe.directions.build
   end
 
@@ -56,13 +55,18 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.destroy
-    redirect_to root_path
-    flash[:success] = "Succesfully deleted recipe!"
+    if !authorized_to_edit?(@recipe)
+      @recipe.destroy
+      redirect_to root_path
+      flash[:success] = "Succesfully deleted recipe!"
+    end
   end
 
   private
 
+  def find_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
 
   def recipe_params
@@ -72,9 +76,5 @@ class RecipesController < ApplicationController
                                   ingredient_attributes: [:id, :name]
                                 ]
                                 )
-  end
-
-  def find_recipe
-    @recipe = Recipe.find(params[:id])
   end
 end
