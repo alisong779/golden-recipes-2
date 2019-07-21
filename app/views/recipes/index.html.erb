@@ -1,7 +1,7 @@
 <div class="container">
 <h1>Recipes</h1>
 <div class="row">
-<% @recipes.each do |recipe| %>
+  <% @recipes.each do |recipe| %>
 <div class="col-md-4">
   <div class="recipe-box">
     <ul>
@@ -11,7 +11,7 @@
     </ul>
   </div>
 </div>
-<% end %>
-<% if !current_user %>
-  <%= link_to "Sign In to create a Recipe", new_user_session_path %>
-<% end %>
+  <% end %>
+  <% if !current_user %>
+    <%= link_to "Sign In to create a Recipe", new_user_session_path %>
+  <% end %>

@@ -15,14 +15,10 @@ Rails.application.routes.draw do
     resources :recipes, :ingredients, :directions, :recipe_ingredients
 
     resources :users, only: [:show] do
-      resources :recipes, only: [:index]
+      resources :recipes, only: [:show, :index]
     end
 
     resources :recipes, only: [:show] do
-      # collection do
-      #   get :most_recent
-      #   get :title_length
-      # end
       resources :ingredients, only: [:index, :new, :create]
     end
 end

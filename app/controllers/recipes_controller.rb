@@ -4,14 +4,16 @@ class RecipesController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = current_user
-      @recipes = @user.recipes
+      @recipes = User.find(params[:user_id]).recipes
+      # @user = current_user
+      # @recipes = @user.recipes
     else
       @recipes = Recipe.most_recent(3).title_length(5)
     end
   end
 
   def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
