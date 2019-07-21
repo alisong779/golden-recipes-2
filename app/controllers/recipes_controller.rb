@@ -55,11 +55,9 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    if !authorized_to_edit?(@recipe)
       @recipe.destroy
       redirect_to root_path
       flash[:success] = "Succesfully deleted recipe!"
-    end
   end
 
   private
