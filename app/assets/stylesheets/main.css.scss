@@ -5,11 +5,15 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    
+
 }
 $body-bg: transparent;
 
 .jumbotron
 {
   background-color: silver;
+}
+
+.css-style {
+border-radius: .5em;
 }

@@ -7,6 +7,7 @@
     <ul>
       <h4><%= recipe.title %></h4>
       <%= recipe.description %><br>
+    
       <% if user_signed_in? %>
         <%= link_to 'View Recipe', recipe %>
       <% end %>
