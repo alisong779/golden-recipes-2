@@ -8,10 +8,8 @@ class Recipe < ApplicationRecord
   scope :title_length, -> (n = 10) {where("LENGTH(title) > ?", n)}
 
   accepts_nested_attributes_for :directions,
-                                reject_if: :all_blank,
                                 allow_destroy: true
   accepts_nested_attributes_for :recipe_ingredients,
-                                reject_if: :all_blank,
                                 allow_destroy: true
 
 

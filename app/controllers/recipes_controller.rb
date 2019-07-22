@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new(user_id: params[:user_id])
-    5.times {@recipe.recipe_ingredients.build.build_ingredient}
+    3.times {@recipe.recipe_ingredients.build.build_ingredient}
     @direction = @recipe.directions.build
   end
 

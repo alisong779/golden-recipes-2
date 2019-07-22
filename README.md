@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Golden Recipes
 
-Things you may want to cover:
+Golden Recipes is my Ruby on Rails Portfolio project for Flatiron School. This is a MVC application using CRUD and RESTful conventions.
 
-* Ruby version
+# Installation:
 
-* System dependencies
+* Ruby version 5.2
 
-* Configuration
+* Clone the github repository: git clone github.com/alisong779/golden_recipes
 
-* Database creation
+* CD into the directory: cd golden_recipes
 
-* Database initialization
+* Run bundle install to update gem dependancies (gems used: devise, bootstrap, nested_form_fields and omniauth for guthub)
 
-* How to run the test suite
+* Migrate the Database: rake db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+* Start the rails server : rails s
 
-* Deployment instructions
+* Visit localhost:3000 to view the web app.
 
-* ...
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/alisong779/golden_recipes. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
