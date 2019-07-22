@@ -1,15 +1,17 @@
 <div class="container">
-<h1>Recipes</h1>
+<h1>Our Latest Recipes:</h1>
 <div class="row">
-  <% @recipes.each do |recipe| %>
+<% @recipes.each do |recipe| %>
 <div class="col-md-4">
   <div class="recipe-box">
+      <%= image_tag(recipe.image, class: "recipe-index") if recipe.image.attached? %>
     <ul>
-      <h4><%= recipe.title %></h4>
-      <%= recipe.description %><br>
-    
+      <br>
+      <li><h4><%= recipe.title %></h4></li>
+      <li><%= recipe.description %></li><br>
+      <br>
       <% if user_signed_in? %>
-        <%= link_to 'View Recipe', recipe %>
+      <li><%= link_to 'View Recipe', recipe %></li>
       <% end %>
     </ul>
   </div>
@@ -18,3 +20,5 @@
   <% if !current_user %>
     <%= link_to "Sign In to Create and View Recipes", new_user_session_path %>
   <% end %>
+</div>
+</div>

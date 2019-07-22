@@ -17,3 +17,33 @@ $body-bg: transparent;
 .css-style {
 border-radius: .5em;
 }
+
+img.recipe-show {
+	width: 400px;
+	height: auto;
+}
+
+.recipe-box {
+	height: 600px;
+	position: relative;
+	box-shadow: 10px 10px 5px #888888;
+	background: silver;
+	margin-bottom: 20px;
+}
+
+img.recipe-index {
+	width: 100%;
+	height: 70%;
+	object-fit: cover;
+}
+
+.recipe-box ul {
+	list-style-type:none;
+	position: absolute;
+  text-align: center;
+	bottom: 0;
+}
+.recipe-box li:first-child {
+  text-align: center;
+	font-size: 24px;
+}

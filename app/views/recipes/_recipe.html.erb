@@ -5,9 +5,9 @@
   <h4>Description:</h4><%= @recipe.description %>
 <br>
 <br>
-  <div>
-  <%= link_to image_tag(@recipe.image, style: 'width:200px', class: "css-style"), recipes_path %>
-  </div>
+
+  <%= image_tag(@recipe.image, style: 'width:200px', class: "css-style") if @recipe.image.attached? %>
+
 <br>
 <strong>Directions:</strong>
     <% @recipe.directions.each do |direction| %><br>
