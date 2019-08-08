@@ -1,24 +1,24 @@
 class RecipesController < ApplicationController
-  before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :find_recipe, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+
+
 
   def index
     if params[:user_id]
       @recipes = User.find(params[:user_id]).recipes
-      # @user = current_user
-      # @recipes = @user.recipes
     else
       @recipes = Recipe.most_recent(3).title_length(5)
     end
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+      @recipe = Recipe.find(params[:id])
   end
 
   def new
     @recipe = Recipe.new(user_id: params[:user_id])
-    3.times {@recipe.recipe_ingredients.build.build_ingredient}
+    5.times {@recipe.recipe_ingredients.build.build_ingredient}
     @direction = @recipe.directions.build
   end
 
@@ -37,13 +37,9 @@ class RecipesController < ApplicationController
       redirect_to recipes_path
       flash[:alert]= "You cant edit that recipe!"
     end
-    # @recipe_ingredient = RecipeIngredient.find(params[:id])
-    # @ingredient = @recipe_ingredient.ingredient
   end
 
   def update
-    # @recipe_ingredient = RecipeIngredient.find(params[:id])
-    # @ingredient = @recipe_ingredient.ingredient
     if !authorized_to_edit?(@recipe)
       redirect to recipes_path
       flash[:alert]= "You cant edit that recipe!"

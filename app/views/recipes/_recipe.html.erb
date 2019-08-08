@@ -1,6 +1,8 @@
 <br>
   <h2><%= @recipe.title %></h2>
-  <%= link_to @recipe.user.email, user_recipes_path(@recipe.user), id: "email" %><br>
+    <% if @recipe.user.username? %>
+      Created By: <%= link_to @recipe.user.username, user_recipes_path(@recipe.user), id: "email" %><br>
+    <% end %>
 <br>
   <h4>Description:</h4><%= @recipe.description %>
 <br>
@@ -9,15 +11,15 @@
   <%= image_tag(@recipe.image, style: 'width:200px', class: "css-style") if @recipe.image.attached? %>
 
 <br>
-<strong>Directions:</strong>
+  <strong>Directions:</strong>
     <% @recipe.directions.each do |direction| %><br>
       <%= direction.step %>
     <% end %>
 <br>
 <br>
-<strong>Ingredients:</strong>
-<ul>
+  <strong>Ingredients:</strong>
+  <ul>
   <% @recipe.recipe_ingredients.each do |ri| %>
     <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.ingredient.name %> </li>
   <% end %>
-</ul>
+  </ul>
