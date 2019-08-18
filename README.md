@@ -2,15 +2,15 @@
 
 # Golden Recipes
 
-Golden Recipes is my Ruby on Rails Portfolio project for Flatiron School. This is a MVC application using CRUD and RESTful conventions.
+Golden Recipes Two is my Ruby on Rails Portfolio with Javascript project for Flatiron School. This is an MVC application using CRUD actions and RESTful URLs.
 
 # Installation:
 
-* Ruby version 5.2
+* Ruby on Rails version 5.2
 
-* Clone the github repository: git clone github.com/alisong779/golden_recipes
+* In your Terminal - Clone the github repository: git clone github.com/alisong779/golden-recipes-2
 
-* CD into the directory: cd golden_recipes
+* CD into the directory: cd golden-recipes-2
 
 * Run bundle install to update gem dependancies (gems used: devise, bootstrap, nested_form_fields and omniauth for guthub)
 
