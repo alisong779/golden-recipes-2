@@ -19,7 +19,7 @@
 <br>
   <strong>Ingredients:</strong>
   <ul>
-  <% @recipe.recipe_ingredients.each do |ri| %>
-    <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.ingredient.name %> </li>
+  <% @recipe.ingredients.each do |ri| %>
+    <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.name %> </li>
   <% end %>
   </ul>

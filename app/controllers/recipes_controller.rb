@@ -5,20 +5,16 @@ class RecipesController < ApplicationController
 
 
   def index
-    if params[:user_id]
-      @recipes = User.find(params[:user_id]).recipes
-    else
-      @recipes = Recipe.most_recent(3).title_length(5)
-    end
+    @recipes = Recipe.most_recent(3).title_length(5)
   end
 
   def show
-      @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
     @recipe = Recipe.new(user_id: params[:user_id])
-    5.times {@recipe.recipe_ingredients.build.build_ingredient}
+    @ingredient = @recipe.ingredients.build
     @direction = @recipe.directions.build
   end
 
@@ -68,9 +64,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :description, :image,
                                   directions_attributes: [:id, :step],
-                                  recipe_ingredients_attributes: [:id, :ingredient_id, :recipe_id, :quantity, :unit,
-                                  ingredient_attributes: [:id, :name]
-                                ]
+                                  ingredients_attributes: [:id, :quantity, :unit, :name]
                                 )
   end
 end
