@@ -23,26 +23,22 @@
       <%= f.file_field :image %>
     </div>
     <br>
-  <h4>Ingredients:</h4>
     <div class="form-group">
-      <%= f.fields_for :ingredients do |i| %>
-    <div class="form-group col-md-3">
+      <h4>Ingredients:</h4>
+      <%= f.nested_fields_for :ingredients, @ingredient do |i| %>
         <%= i.label :quantity %>
         <%= i.text_field :quantity, class: 'form-control' %>
-    </div>
-    <div class="form-group col-md-3">
         <%= i.label :unit %>
         <%= i.text_field :unit, class: 'form-control' %>
-  </div>
-    <div class="form-group col-md-3">
         <%= i.label :name %>
         <%= i.text_field :name, class: 'form-control' %>
-    </div>
       <% end %>
+      <%= f.add_nested_fields_link :ingredients, 'Add Ingredients' %>
+    </div>
 <br>
 <br>
-<div class="form-group" >
-    <h4>Directions:</h4>
+    <div class="form-group" >
+      <h4>Directions:</h4>
       <%= f.nested_fields_for :directions, @direction do |direction| %>
         <%= direction.label :step %>
         <%= direction.text_field :step, class: 'form-control'%>
@@ -51,7 +47,6 @@
   </div>
 <br>
 
-  </div>
   <div class="actions">
       <%= f.submit "Submit", class: 'btn btn-primary' %>
   </div>
