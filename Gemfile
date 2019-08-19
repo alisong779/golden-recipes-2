@@ -43,6 +43,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'pry'
 gem 'nested_form_fields'
+gem 'active_model_serializers'
 
 
 

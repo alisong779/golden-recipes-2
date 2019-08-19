@@ -2,14 +2,17 @@ class RecipesController < ApplicationController
   before_action :find_recipe, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
-
-
   def index
-    @recipes = Recipe.most_recent(3).title_length(5)
+    if params[:user_id]
+      @recipes = User.find(params[:user_id]).recipes
+    else
+      @recipes = Recipe.most_recent(3).title_length(5)
+    end
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+    @comments = Comment.all
   end
 
   def new

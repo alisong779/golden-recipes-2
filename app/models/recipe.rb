@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :ingredients
   has_many :directions
+  has_many :comments
   belongs_to :user
   validates :title, :description, presence: true
   scope :most_recent, -> (limit) {order("created_at desc").limit(limit)}

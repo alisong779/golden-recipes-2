@@ -1,7 +1,7 @@
 <br>
   <h2><%= @recipe.title %></h2>
     <% if @recipe.user.username? %>
-      Created By: <%= link_to @recipe.user.username, user_recipes_path(@recipe.user), id: "email" %><br>
+      Created By: <%= link_to @recipe.user.username, user_recipes_path(@recipe.user), id: "username" %><br>
     <% end %>
 <br>
   <h4>Description:</h4><%= @recipe.description %>
@@ -23,3 +23,12 @@
     <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.name %> </li>
   <% end %>
   </ul>
+  <br>
+
+  <div id='comment-form'>
+    <button onclick="displayCreateForm(<%=@recipe.id%>)">Add Comment</button>
+  </div>
+  <br>
+  <div id='comments'>
+    <button onclick="getComments(<%=@recipe.id%>)">View Comments</button>
+  </div>
