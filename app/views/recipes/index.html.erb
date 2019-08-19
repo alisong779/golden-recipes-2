@@ -7,9 +7,8 @@
       <%= image_tag(recipe.image, class: "recipe-index") if recipe.image.attached? %>
     <ul>
       <br>
-      <li><h4><%= recipe.title %></h4></li>
-      <li><%= recipe.description %></li><br>
-      <br>
+      <li><h3><%= recipe.title %></h3></li>
+      <li><%= recipe.description %></li>
       <% if user_signed_in? %>
       <li><%= link_to 'View Recipe', recipe %></li>
       <% end %>
