@@ -12,7 +12,6 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @comments = Comment.all
   end
 
   def new
@@ -22,6 +21,7 @@ class RecipesController < ApplicationController
   end
 
   def create
+    
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to recipe_path(@recipe)
