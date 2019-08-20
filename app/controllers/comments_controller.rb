@@ -2,15 +2,14 @@ class CommentsController < ApplicationController
 	before_action :set_comment, only: [:show, :edit, :update]
 
 	def index
-		if params[:recipe_id]
-      @comments = Recipe.find(params[:recipe_id]).comments
-    else
-      @comments = Comment.all
-    end
-    render json: @comments, status: 200
+		@comments = Comment.all
+		respond_to do |format|
+			format.html
+			format.json {render json: @comments}
 	end
 
 	def show
+		@comment = Comment.find_by_id(params[:id])
 		render json: @comment
 	end
 
