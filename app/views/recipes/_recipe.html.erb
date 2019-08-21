@@ -1,3 +1,4 @@
+<div class="container">
 <br>
   <h2><%= @recipe.title %></h2>
     <% if @recipe.user.username? %>
@@ -24,10 +25,11 @@
   <% end %>
   </ul>
   <br>
+</div>
 
 <h3>Comments</h3>
 <a href="#" onclick="displayCreateForm(<%=@recipe.id%>); return false;">Add Comment</a><br>
-<a href="#" onclick="getComments(); return false;">View Comments</a>
+<a href="#" onclick="getComments(<%=@recipe.id%>); return false;">View Comments</a>
 <br>
 <div id="comment-form"></div>
 <div id="main">
@@ -36,5 +38,7 @@
 </div>
 <br>
 <br>
+<br>
+
 <br>
 <br>

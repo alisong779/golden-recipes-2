@@ -1,0 +1,210 @@
+const BASE_URL = 'http://localhost:3000'
+window.addEventListener('DOMContentLoaded', (event) => { 
+	console.log('DOM fully loaded and parsed'); 
+
+	let rootElement = document.querySelector('body'); 
+	rootElement.addEventListener('submit', function(event){ 
+		event.preventDefault();
+		let value = document.getElementById('comment').value
+		console.log(value);
+	}, true)
+});
+
+function displayCreateForm(id){
+	let commentFormDiv = document.getElementById('comment-form')
+	let html =
+	 ` <form onsubmit="createComment(); return false;">
+		<label>Comment: </label>
+		<input type="text" id="comment"><br />
+		<input type="submit" value="Create Comment"> 
+		</form> `
+	commentFormDiv.innerHTML = html;
+	// console.log(document.querySelector("form"))
+	// addEventListener("submit", createComment, true)
+}
+
+function createComment(value){
+	// comt = {
+	// 	comment: document.getElementById('comment').value
+	// }
+	let id = this.dataset.id
+	fetch(BASE_URL + '/recipes/${id}/comments', {
+		method: 'POST',
+		body: JSON.stringify({value}),
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		}
+	}).then(resp => resp.json())
+	.then(value => {
+		let cmt = new Ct(value);
+		document.querySelector("#main ul").innerHTML = `
+		<p>Comment Added</p>
+		`
+	})
+}
+
+function getComments(id){
+	let main = document.getElementById('main')
+	main.innerHTML = '<ul>'
+	fetch(BASE_URL + '/recipes/${id}/comments')
+	.then(resp => resp.json())
+	.then(comments => {
+		main.innerHTML += comments.map(comment => {
+		const cmt = new Ct(comment)
+		return cmt.renderComment()
+	}).join('')
+	main.innerHTML += '</ul>'
+	})
+}
+
+function	displayComment(e){
+	e.preventDefault();
+	clearForm()
+	let id = this.dataset.id
+	let main = document.getElementById('main')
+	main.innerHTML = ''
+
+	fetch(BASE_URL + '/recipes/${this.dataset.recipeid}/comments/${this.dataset.id}')
+		.then(resp => resp.json())
+		.then(comment =>{
+			main.innerHTML += '<h3>${comment.comment}</h3>'
+		})
+}
+
+
+function clearForm(){
+	let commentFormDiv = document.getElementById('comment-form')
+	commentFormDiv.innerHTML = ''
+}
+
+
+class Ct{
+	constructor(comment){
+		this.id = comment.id
+		this.comment = comment.comment
+		this.recipe_id = comment.recipe_id
+	}
+	renderComment(){
+		return `<li id="comments-lis" data-id="${this.id}"><a href="#" data-id="${this.id}" data-recipeid="${this.recipe_id}" id="comments-links">${this.comment}</a></li>`
+	}
+}
+-------------------------
+def index
+	comments = Comment.all
+	render json: comments
+end
+
+def show
+	binding.pry
+	comment = Comment.find_by_id(params[:id])
+	render json: comment
+end
+
+def create
+	binding.pry
+	comment = Comment.new(comment_params)
+	if comment.save
+		render json: comment, status: 201
+	else
+		render json: {errors: comment.errors.full_messages}, status: :bad_request
+	end
+end
+
+
+private
+
+def comment_params
+	params.require(:comment).permit(:comment, :user_id, :recipe_id)
+end
+
+---------
+
+<!-- <h3>Comments</h3>
+<a href="#" onclick="displayCreateForm(<%=@recipe.id%>); return false;">Add Comment</a><br>
+<a href="#" onclick="getComments(<%=@recipe.id%>); return false;">View Comments</a>
+<br>
+<div id="comment-form"></div>
+<div id="main">
+  <ul>
+  </ul>
+</div>
+<br>
+<br>
+<br>
+<br> -->
+
+
+
+
+
+---------
+def index
+	@comments = Comment.all
+end
+
+def show
+	@comment = Comment.find(params[:id])
+end
+
+def new
+	@comment= Comment.new(user_id: params[:user_id])
+	@comment = @recipe.comments.build
+end
+
+def create
+	@comment = current_user.comments.build(comment_params)
+	if @comment.save
+		redirect_to recipe_comment_path(@comment)
+		flash[:success] = "Comment Sucessfully Created!"
+	else
+		render 'new'
+	end
+end
+
+def edit
+	if !authorized_to_edit?(@comment)
+		redirect_to recipe_comment_path
+		flash[:alert]= "You cant edit that!"
+	end
+end
+
+def update
+	if !authorized_to_edit?(@comment)
+		redirect to recipes_comment_path
+		flash[:alert]= "You cant edit that!"
+	end
+	if @comment.update(comment_params)
+		redirect_to @comment
+		flash[:success] = "Sucessfully Updated Comment!"
+	else
+		render 'edit'
+	end
+end
+
+def destroy
+		@comment.destroy
+		redirect_to root_path
+		flash[:success] = "Succesfully deleted comment!"
+end
+
+private
+
+def find_comment
+	@comment = Comment.find(params[:id])
+end
+
+
+def comment_params
+	params.require(:comment).permit(:comment, :recipe_id)
+end
+
+
+
+
+
+
+
+
+
+end

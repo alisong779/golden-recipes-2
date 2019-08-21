@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => { 
 	console.log('DOM fully loaded and parsed'); 
 
 	let rootElement = document.querySelector('body'); 
-	rootElement.addEventListener('submit',function(event){ 
+	rootElement.addEventListener('submit', function(event){ 
 		event.preventDefault();
 		let value = document.getElementById('comment').value
 		console.log(value);
@@ -13,46 +13,46 @@ window.addEventListener('DOMContentLoaded', (event) => { 
 function displayCreateForm(id){
 	let commentFormDiv = document.getElementById('comment-form')
 	let html =
-	 ` <form id="new_form">
+	 ` <form onsubmit="createComment(${id}); return false;">
 		<label>Comment: </label>
 		<input type="text" id="comment"><br />
 		<input type="submit" value="Create Comment"> 
 		</form> `
 	commentFormDiv.innerHTML = html;
 	// console.log(document.querySelector("form"))
-	// addEventListener("submit", createComment, true)
+	addEventListener("submit", createComment, true)
 }
 
-function createComment(value){
-	// comt = {
-	// 	comment: document.getElementById('comment').value
-	// }
-	fetch(BASE_URL + 'recipes/${id}/comments', {
-		method: 'POST',
-		body: JSON.stringify({value}),
+function createComment(id){
+	comt = {
+		comment: document.getElementById("comment").value
+	}
+
+	fetch(BASE_URL + '/recipes/${id}/comments', {
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json'
-		}
-	}).then(resp => resp.json())
-	.then(value => {
-		let cmt = new Ct(value);
-		document.querySelector("#main ul").innerHTML = `
-		<p>Comment Added</p>
-		`
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(comt)
+	})
+	.then(resp => resp.json())
+	.then(comment => {
+		let cmt = new Ct(comment)
+		getComments(cmt.recipe_id)
 	})
 }
 
+
 function getComments(id){
-	clearForm()
 	let main = document.getElementById('main')
 	main.innerHTML = '<ul>'
 	fetch(BASE_URL + '/recipes/${id}/comments')
 	.then(resp => resp.json())
 	.then(comments => {
 		main.innerHTML += comments.map(comment => {
-		const cmt = new Ct(comment)
-		return cmt.renderComment()
+		let cmt = new Ct(comment)
+		return cmt.renderComment(comment)
 	}).join('')
 	main.innerHTML += '</ul>'
 	})

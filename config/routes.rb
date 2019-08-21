@@ -11,13 +11,13 @@ Rails.application.routes.draw do
       get 'signup', to: 'devise/registrations#new'
     end
 
-    resources :recipes, :ingredients, :directions, :comments
+    resources :recipes, :ingredients, :directions
 
     resources :users, only: [:show] do
       resources :recipes, only: [:show, :index]
     end
 
     resources :recipes, only: [:show] do
-      resources :comments, only: [:new, :create, :show, :edit, :update, :destroy]
+      resources :comments
     end
 end
