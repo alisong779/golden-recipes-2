@@ -24,21 +24,11 @@
     <li><%= ri.quantity %> <%= ri.unit %> - <%= ri.name %> </li>
   <% end %>
   </ul>
-  <br>
-</div>
-
-<h3>Comments</h3>
-<a href="#" onclick="displayCreateForm(<%=@recipe.id%>); return false;">Add Comment</a><br>
-<a href="#" onclick="getComments(<%=@recipe.id%>); return false;">View Comments</a>
 <br>
-<div id="comment-form"></div>
+<div id='comment-form'>
+  <button onclick="displayCreateForm(<%=@recipe.id%>)">Add A Comment</button>
 <div id="main">
   <ul>
   </ul>
 </div>
-<br>
-<br>
-<br>
-
-<br>
-<br>
+</div>

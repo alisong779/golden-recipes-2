@@ -1,5 +1,5 @@
 
-<%= render 'recipe' %>
+<%= render 'recipe', locals: @comment %>
   <% if current_user.id == @recipe.user_id%>
     <%= link_to "Edit", edit_recipe_path %>|
     <%= link_to "Delete", recipe_path, method: :delete, data: {confirm: "You sure?"} %>

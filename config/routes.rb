@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get 'signup', to: 'devise/registrations#new'
     end
 
-    resources :recipes, :ingredients, :directions
+    resources :recipes, :ingredients, :directions, :comments
 
     resources :users, only: [:show] do
       resources :recipes, only: [:show, :index]

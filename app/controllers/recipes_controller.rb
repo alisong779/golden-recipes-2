@@ -12,12 +12,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @comment = @recipe.comments.build
   end
 
   def new
     @recipe = Recipe.new(user_id: params[:user_id])
     @ingredient = @recipe.ingredients.build
     @direction = @recipe.directions.build
+    @comment = @recipe.comments.build
   end
 
   def create
@@ -66,7 +68,8 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :description, :image,
                                   directions_attributes: [:id, :step],
-                                  ingredients_attributes: [:id, :quantity, :unit, :name]
+                                  ingredients_attributes: [:id, :quantity, :unit, :name],
+                                  comments_attributes: [:id, :comment]
                                 )
   end
 end

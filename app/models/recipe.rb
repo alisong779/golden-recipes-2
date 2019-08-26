@@ -12,6 +12,8 @@ class Recipe < ApplicationRecord
                                 allow_destroy: true
   accepts_nested_attributes_for :ingredients,
                                 allow_destroy: true
+  accepts_nested_attributes_for :comments,
+                                allow_destroy: true
 
 
 
