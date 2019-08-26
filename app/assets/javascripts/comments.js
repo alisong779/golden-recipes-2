@@ -1,13 +1,27 @@
 const BASE_URL = "http://localhost:3000"
 
 function displayCreateForm(id){
-  document.querySelector("#comment-form").innerHTML = `
-    <form onsubmit="createComment(${id}); return false;">
-      <label>Comment </label>
-      <input type="textarea" id="comment"> <br>
-      <input type="submit" value="Create Comment">
+  let form = document.querySelector("#comment-form");
+  let html = `
+    <form id="comment-form">
+    <label>Comment </label>
+    <input type="textarea" id="comment"> <br>
+    <input type="submit" value="Submit" id="button">
     </form>
-    `;
+  `
+  form.innerHTML = html
+
+  document.getElementById("comment-form").addEventListener('submit', function (event){
+    event.preventDefault()
+    createComment(`${id}`)
+  })
+  // document.querySelector("#comment-form").innerHTML = `
+  //   <form onsubmit="createComment(${id}); return false;">
+  //     <label>Comment </label>
+  //     <input type="textarea" id="comment"> <br>
+  //     <input type="submit" value="Submit" id="button">
+  //   </form>
+  //   `
 	}
 
   class Comment {
@@ -32,15 +46,15 @@ function displayCreateForm(id){
     };
     fetch(BASE_URL + `/recipes/${id}/comments`, {
       method: "POST",
+      body: JSON.stringify(comment),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(comment)
+      }
     })
     .then(resp => resp.json())
-    .then(cmt => {
-      let c = new Comment(cmt);
+    .then(comment => {
+      let c = new Comment(comment);
       document.querySelector("#comment-form").innerHTML = `
         <p>Comment has been added</p><br>
       `;
@@ -50,7 +64,7 @@ function displayCreateForm(id){
 
   function getComments(id){
     $("#comments").html(`<ul>`)
-    fetch(BASE_URL + `/recipes/${id}.json`)
+    fetch(BASE_URL + `/recipes/${id}/comments.json`)
     .then(resp => resp.json())
     .then(recipe => {
       document.getElementById("comments").innerHTML += recipe.comments.map(cmt => {

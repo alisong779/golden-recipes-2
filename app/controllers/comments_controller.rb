@@ -1,7 +1,11 @@
 class CommentsController < ApplicationController
 	before_action :authenticate_user!, only: [:edit, :update, :destroy]
-	skip_before_action :verify_authenticity_token
+	before_action :set_recipe, only: [:index]
+	# skip_before_action :verify_authenticity_token
 
+	def index
+
+	end
 
 	def new
 		@comment = @recipe.comments.build
@@ -14,6 +18,7 @@ class CommentsController < ApplicationController
 
 	def create
 		comment = @recipe.comments.build(comment_params)
+		comment.user = current_user
 		if comment.save
 			render json: comment
 		else
@@ -28,6 +33,11 @@ class CommentsController < ApplicationController
 
 
 	private
+
+	def set_recipe
+		@recipe = Recipe.find(params[:recipe_id])
+	end
+
 
 	def comment_params
 		params.require(:comment).permit(:comment, :recipe_id)

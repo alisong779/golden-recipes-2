@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :find_recipe, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  # skip_before_action :verify_authenticity_token
 
   def index
     if params[:user_id]
@@ -16,7 +17,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
             format.html
             format.json{render json: @recipe}
-    end 
+    end
   end
 
   def new
