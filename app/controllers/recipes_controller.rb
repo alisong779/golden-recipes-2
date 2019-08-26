@@ -13,11 +13,8 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @comment = @recipe.comments.build
-    respond_to do |format|
-            format.html
-            format.json{render json: @recipe}
-    end
+    # @comment = @recipe.comments.build
+    # render json: @comments
   end
 
   def new

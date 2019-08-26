@@ -46,11 +46,11 @@ function displayCreateForm(id){
     };
     fetch(BASE_URL + `/recipes/${id}/comments`, {
       method: "POST",
-      body: JSON.stringify(comment),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify(comment)
     })
     .then(resp => resp.json())
     .then(comment => {
