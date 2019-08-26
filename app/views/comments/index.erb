@@ -1,1 +1,6 @@
 <strong>Comments:</strong>
+<ul>
+<% @recipe.comments.each do |ct| %>
+  <li><%= ct.comment%></li>
+<% end %>
+</ul>

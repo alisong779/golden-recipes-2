@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = "http://localhost:3000"
 
 function displayCreateForm(id){
   document.querySelector("#comment-form").innerHTML = `
@@ -11,10 +11,18 @@ function displayCreateForm(id){
 	}
 
   class Comment {
-    constructor(obj) {
-        this.id = obj.id
-        this.comment = obj.comment
-        this.recipe_id = obj.recipe_id
+    constructor(ct) {
+        this.id = ct.id
+        this.comment = ct.comment
+        this.recipe_id = ct.recipe_id
+    }
+
+    renderComment(){
+      return `
+        <div>
+          <p>${this.comment}</p>
+        </div>
+      `
     }
   }
 
@@ -31,11 +39,24 @@ function displayCreateForm(id){
       body: JSON.stringify(comment)
     })
     .then(resp => resp.json())
-    .then(comment => {
-      let c = new Comment(comment);
+    .then(cmt => {
+      let c = new Comment(cmt);
       document.querySelector("#comment-form").innerHTML = `
         <p>Comment has been added</p><br>
       `;
       getComments(c.recipe_id);
     });
+  }
+
+  function getComments(id){
+    $("#comments").html(`<ul>`)
+    fetch(BASE_URL + `/recipes/${id}.json`)
+    .then(resp => resp.json())
+    .then(recipe => {
+      document.getElementById("comments").innerHTML += recipe.comments.map(cmt => {
+        let c = new Comment(cmt)
+        return c.renderComment()
+      }).join('')
+      $("#comments").append(`</ul>`)
+    })
   }
