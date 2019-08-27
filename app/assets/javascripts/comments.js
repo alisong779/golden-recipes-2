@@ -38,6 +38,11 @@ function displayCreateForm(id){
         </div>
       `
     }
+    renderCommentLink() {
+        return `
+            <li id="comments-lis" data-id="${this.id}"><a href="#" data-id="${this.id}" data-rec_id="${this.recipe_id}" id="comments-links">${this.comment}</a></li>
+        `
+    }
   }
 
   function createComment(id){
@@ -69,8 +74,29 @@ function displayCreateForm(id){
     .then(comments => {
       document.getElementById("comment-form").innerHTML += comments.map(cmt => {
         let c = new Comment(cmt)
-        return c.renderComment()
+        // return c.renderComment()
+        return c.renderCommentLink()
       }).join('')
       $("#comment-form").append(`</ul>`)
+      addListenersToLinks()
     })
   }
+
+  function addListenersToLinks() {
+    document.querySelectorAll("#comments-links").forEach(function(link) {
+        link.addEventListener("click", displayComment)
+    })
+}
+
+function displayComment(e) {
+    e.preventDefault()
+    let id = this.dataset.id
+    let main = document.getElementById('main')
+    main.innerHTML = ''
+
+    fetch(BASE_URL + `/recipes/${this.dataset.rec_id}/comments/${id}`)
+    .then(resp => resp.json())
+    .then(comment => {
+        main.innerHTML += `<h3>${comment.comment}</h3>`
+    })
+}

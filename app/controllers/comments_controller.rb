@@ -13,8 +13,8 @@ class CommentsController < ApplicationController
 	end
 
 	def show
-		@comment = @recipe.comments.find_by(id: params[:id])
-		render json: @comment
+		comment = Comment.find_by_id(params[:id])
+		render json: comment
 	end
 
 	def create
