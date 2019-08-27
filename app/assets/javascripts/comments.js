@@ -92,7 +92,7 @@ function displayComment(e) {
     e.preventDefault()
     let id = this.dataset.id
     let main = document.getElementById('main')
-    main.innerHTML = ''
+    // main.innerHTML = ''
 
     fetch(BASE_URL + `/recipes/${this.dataset.rec_id}/comments/${id}`)
     .then(resp => resp.json())
