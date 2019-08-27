@@ -57,8 +57,8 @@ function displayCreateForm(id){
       let c = new Comment(resp);
       document.querySelector("#comment-form").innerHTML = `
         <p>Comment has been added!</p><br>
+        <button onclick='getComments(${c.recipe_id})'>See All Comments</button>
       `;
-      getComments(c.recipe_id);
     });
   }
 
