@@ -50,13 +50,13 @@ function displayCreateForm(id){
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(comment)
+      body: JSON.stringify({comment})
     })
     .then(resp => resp.json())
-    .then(comment => {
-      let c = new Comment(comment);
+    .then(resp => {
+      let c = new Comment(resp);
       document.querySelector("#comment-form").innerHTML = `
-        <p>Comment has been added</p><br>
+        <p>Comment has been added!</p><br>
       `;
       getComments(c.recipe_id);
     });
@@ -64,13 +64,13 @@ function displayCreateForm(id){
 
   function getComments(id){
     $("#comments").html(`<ul>`)
-    fetch(BASE_URL + `/recipes/${id}/comments.json`)
+    fetch(BASE_URL + `/recipes/${id}/comments`)
     .then(resp => resp.json())
-    .then(recipe => {
-      document.getElementById("comments").innerHTML += recipe.comments.map(cmt => {
+    .then(comments => {
+      document.getElementById("comment-form").innerHTML += comments.map(cmt => {
         let c = new Comment(cmt)
         return c.renderComment()
       }).join('')
-      $("#comments").append(`</ul>`)
+      $("#comment-form").append(`</ul>`)
     })
   }

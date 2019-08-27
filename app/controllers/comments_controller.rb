@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
 	# skip_before_action :verify_authenticity_token
 
 	def index
-
+		comments = Recipe.find(params[:recipe_id]).comments
+		render json: comments
 	end
 
 	def new

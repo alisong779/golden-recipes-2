@@ -1,4 +1,4 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :comment_id
+  attributes :id, :title, :description
   has_many :comments
 end
