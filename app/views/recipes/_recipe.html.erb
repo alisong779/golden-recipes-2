@@ -25,9 +25,9 @@
   <% end %>
   </ul>
 <br>
-<div id='comment-form'>
-  <button onclick="displayCreateForm(<%=@recipe.id%>)">Add A Comment</button>
-  <button onclick='getComments(<%=@recipe.id%>)'>See All Comments</button>
+<div id='comment-form' class="form-group">
+  <button class="btn btn-primary" onclick="displayCreateForm(<%=@recipe.id%>)">Add A Comment</button>
+  <button class="btn btn-primary" onclick='getComments(<%=@recipe.id%>)'>See All Comments</button>
 <div id="main">
   <ul>
   </ul>

@@ -5,8 +5,8 @@ function displayCreateForm(id){
   let html = `
     <form id="comment-form">
     <label>Comment </label>
-    <input type="textarea" id="comment"> <br>
-    <input type="submit" value="Submit" id="button">
+    <textarea class="form-control" rows="5" id="comment"></textarea> <br>
+    <input type="submit" value="Submit" class="btn btn-primary" id="button">
     </form>
   `
   form.innerHTML = html
@@ -15,13 +15,6 @@ function displayCreateForm(id){
     event.preventDefault()
     createComment(`${id}`)
   })
-  // document.querySelector("#comment-form").innerHTML = `
-  //   <form onsubmit="createComment(${id}); return false;">
-  //     <label>Comment </label>
-  //     <input type="textarea" id="comment"> <br>
-  //     <input type="submit" value="Submit" id="button">
-  //   </form>
-  //   `
 	}
 
   class Comment {
@@ -61,8 +54,9 @@ function displayCreateForm(id){
     .then(resp => {
       let c = new Comment(resp);
       document.querySelector("#comment-form").innerHTML = `
-        <p>Comment has been added!</p><br>
-        <button onclick='getComments(${c.recipe_id})'>See All Comments</button>
+        <p>Your comment has been added!</p>
+        <h4>${c.comment}</h4>
+        <button class="btn btn-primary" onclick='getComments(${c.recipe_id})'>See All Comments</button>
       `;
     });
   }
