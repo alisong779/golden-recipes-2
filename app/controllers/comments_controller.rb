@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 	# before_action :authenticate_user!, only: [:edit, :update, :destroy]
 	before_action :set_recipe, only: [:index, :create]
-	# skip_before_action :verify_authenticity_token
 
 	def index
 		comments = Recipe.find(params[:recipe_id]).comments
