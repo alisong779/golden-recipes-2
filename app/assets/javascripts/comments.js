@@ -63,7 +63,8 @@ function displayCreateForm(id){
       let c = new Comment(resp);
       document.querySelector("#comment-form").innerHTML = `
         <p>Your comment has been added!</p>
-        <h4>${c.title}</h4>
+        <strong>${c.title}</strong><br>
+        <br>
         <button class="btn btn-primary" onclick='getComments(${c.recipe_id})'>See All Comments</button>
       `;
     });
