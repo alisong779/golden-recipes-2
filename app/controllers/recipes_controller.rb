@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
     if params[:user_id]
       @recipes = User.find(params[:user_id]).recipes
     else
-      @recipes = Recipe.most_recent(3).title_length(5)
+      @recipes = Recipe.most_recent(6).title_length(5)
     end
   end
 

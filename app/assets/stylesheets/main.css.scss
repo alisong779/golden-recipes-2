@@ -4,6 +4,13 @@
   background-color: silver;
 }
 
+html {
+    background: url(food.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 .css-style {
 border-radius: .5em;
