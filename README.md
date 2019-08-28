@@ -2,7 +2,8 @@
 
 # Golden Recipes 2
 
-Golden Recipes Two is my Ruby on Rails with Javascript portfolio project for Flatiron School.
+Golden Recipes Two is my Ruby on Rails with Javascript portfolio project for Flatiron School. This project includes all of the
+functionality of the original Golden Recipes but with added asynchronous Javascript functions and a JSON API.
 
 # Installation:
 
