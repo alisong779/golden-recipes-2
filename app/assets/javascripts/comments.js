@@ -101,7 +101,7 @@ function displayComment(e) {
     fetch(BASE_URL + `/recipes/${this.dataset.rec_id}/comments/${id}`)
     .then(resp => resp.json())
     .then(comment => {
-        main.innerHTML += `<h3>${comment.title}</h3>`
+        main.innerHTML += `<br><h4>${comment.title}</h4>`
         main.innerHTML += `<p>${comment.comment}</p>`
     })
 }
