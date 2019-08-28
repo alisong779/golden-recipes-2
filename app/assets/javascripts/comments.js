@@ -76,12 +76,17 @@ function displayCreateForm(id){
     fetch(BASE_URL + `/recipes/${id}/comments`)
     .then(resp => resp.json())
     .then(comments => {
-      document.getElementById("comment-form").innerHTML += comments.map(cmt => {
-        let c = new Comment(cmt)
-        return c.renderCommentLink()
-      }).join('')
-      $("#comment-form").append(`</ul>`)
-      addListenersToLinks()
+
+      if (comments.length === 0){
+        document.getElementById("comment-form").innerHTML += `<strong>No comments have been added to this recipe!</strong>`
+      }else{
+        document.getElementById("comment-form").innerHTML += comments.map(cmt => {
+          let c = new Comment(cmt)
+          return c.renderCommentLink()
+        }).join('')
+        $("#comment-form").append(`</ul>`)
+        addListenersToLinks()
+      }
     })
   }
 
