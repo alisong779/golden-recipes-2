@@ -11,6 +11,7 @@ function displayCreateForm(id){
     <textarea class="form-control" rows="5" id="comment"></textarea> <br>
     <input type="submit" value="Submit" class="btn btn-primary" id="button">
     </form>
+    <br></br>
   `
   form.innerHTML = html
 
@@ -62,10 +63,12 @@ function displayCreateForm(id){
     .then(resp => {
       let c = new Comment(resp);
       document.querySelector("#comment-form").innerHTML = `
-        <p>Your comment has been added!</p>
-        <strong>${c.title}</strong><br>
+        <h4>Your comment has been added:</h4>
+        <p>Title: ${c.title}<p>
+        <p>Comment: ${c.comment}</p>
         <br>
         <button class="btn btn-primary" onclick='getComments(${c.recipe_id})'>See All Comments</button>
+        <br></br>
       `;
     });
   }
@@ -78,13 +81,13 @@ function displayCreateForm(id){
     .then(comments => {
 
       if (comments.length === 0){
-        document.getElementById("comment-form").innerHTML += `<strong>No comments have been added to this recipe!</strong>`
+        document.getElementById("comment-form").innerHTML += `<strong>No comments have been added to this recipe!</strong><br><br>`
       }else{
         document.getElementById("comment-form").innerHTML += comments.map(cmt => {
           let c = new Comment(cmt)
           return c.renderCommentLink()
         }).join('')
-        $("#comment-form").append(`</ul>`)
+        $("#comment-form").append(`</ul><br>`)
         addListenersToLinks()
       }
     })
@@ -108,6 +111,6 @@ function displayComment(e) {
     .then(resp => resp.json())
     .then(comment => {
         main.innerHTML += `<br><h4>${comment.title}</h4>`
-        main.innerHTML += `<p>${comment.comment}</p>`
+        main.innerHTML += `<p>${comment.comment}</p><br>`
     })
 }
